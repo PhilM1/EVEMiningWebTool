@@ -12,7 +12,8 @@ var asteroidVolume = 0;
 var timeToCompletion = 0;
 var startTime = new Date().getTime();
 var endTime = 0;
-var timeleft = 0;
+var timeLeft = 0;
+//var timeDiff = 0;
 
 function init()
 {
@@ -21,32 +22,37 @@ function init()
 	yieldPerSecond = yield / cycleTime;
 	oreVolume = veldsparVolume;
 	asteroidQuantity = 15000;
-	asteroidVolume = asteroidQuantity / oreVolume;
+	asteroidVolume = asteroidQuantity * oreVolume;
 	timeToCompletion = asteroidVolume / yieldPerSecond;
 	startTime = new Date().getTime();
+	endTime = startTime + (timeToCompletion * 1000);
+	document.getElementById("debug").innerHTML = timeToCompletion;
 }
 
 function updateYield()
 {
-var timeDiff = new Date().getTime() - startTime;
-document.getElementById("miningYield").innerHTML = timeDiff;
+	timeLeft = endTime - new Date().getTime();
+	document.getElementById("miningYield").innerHTML = timeLeft / 1000;
 }
 
-function displayDate()
+function reset()
 {
-document.getElementById("demo").innerHTML=Date();
+	init();
+	//document.getElementById("demo").innerHTML=Date();
 }
 
-setInterval(updateYield, 33);
+setInterval(updateYield, 33); //will call updateYield every 100ms
 </script>
 </head>
 <body>
 
-<h1>My First JavaScript</h1>
-<p id="demo">This is a paragraph.</p>
+<h1>Eve Mining Helper</h1>
+
 <p id="miningYield">This is a Paragraph for mining yield.</p>
 
-<button type="button" onclick="displayDate()">Display Date</button>
+<p id="debug">This is a Paragraph for mining yield.</p>
+
+<button type="button" onclick="reset()">Reset</button>
 
 </body>
 </html> 
