@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var yield = 0;
+var cycleTime = 0;
+var yieldPerSecond = 0;
+var veldsparVolume = 0.1;
+var oreVolume = 0;
+var asteroidQuantity = 0;
+var asteroidVolume = 0;
+var timeToCompletion = 0;
+var startTime = new Date().getTime();
+var endTime = 0;
+var timeleft = 0;
+
+function init()
+{
+	yield = 540;
+	cycleTime = 180;
+	yieldPerSecond = yield / cycleTime;
+	oreVolume = veldsparVolume;
+	asteroidQuantity = 15000;
+	asteroidVolume = asteroidQuantity / oreVolume;
+	timeToCompletion = asteroidVolume / yieldPerSecond;
+	startTime = new Date().getTime();
+}
+
+function updateYield()
+{
+var timeDiff = new Date().getTime() - startTime;
+document.getElementById("miningYield").innerHTML = timeDiff;
+}
+
+function displayDate()
+{
+document.getElementById("demo").innerHTML=Date();
+}
+
+setInterval(updateYield, 33);
+</script>
+</head>
+<body>
+
+<h1>My First JavaScript</h1>
+<p id="demo">This is a paragraph.</p>
+<p id="miningYield">This is a Paragraph for mining yield.</p>
+
+<button type="button" onclick="displayDate()">Display Date</button>
+
+</body>
+</html> 
