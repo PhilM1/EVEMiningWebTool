@@ -29,6 +29,20 @@ function init()
 	document.getElementById("debug").innerHTML = timeToCompletion;
 }
 
+function setYieldCycle()
+{
+	yield = document.getElementById("yield1").value;
+	cycleTime = document.getElementById("cycle2").value;
+	yieldPerSecond = yield / cycleTime;
+	oreVolume = veldsparVolume;
+	asteroidQuantity = 15000;
+	asteroidVolume = asteroidQuantity * oreVolume;
+	timeToCompletion = asteroidVolume / yieldPerSecond;
+	startTime = new Date().getTime();
+	endTime = startTime + (timeToCompletion * 1000);
+	document.getElementById("debug").innerHTML = timeToCompletion;
+}
+
 function updateYield()
 {
 	timeLeft = endTime - new Date().getTime();
@@ -47,12 +61,16 @@ setInterval(updateYield, 33); //will call updateYield every 100ms
 <body>
 
 <h1>Eve Mining Helper</h1>
+Yield: <input type="text" name="yieldInput" id="yield1"><br>
+Cycle Time: <input type="text" name="cycleTimeInput" id="cycle2">
 
 <p id="miningYield">This is a Paragraph for mining yield.</p>
 
 <p id="debug">This is a Paragraph for mining yield.</p>
 
+<button type="button" onclick="setYieldCycle()">Reset2</button>
 <button type="button" onclick="reset()">Reset</button>
+
 
 </body>
 </html> 
