@@ -15,61 +15,292 @@ var endTime = 0;
 var timeLeft = 0;
 //var timeDiff = 0;
 
-function init()
+
+var endTime1 = 0;
+var endTime2 = 0;
+var endTime3 = 0;
+var timeLeft1 = 0;
+var timeLeft2 = 0;
+var timeLeft3 = 0;
+
+//function init()
+//{
+//	yield = 540;
+//	cycleTime = 180;
+//	yieldPerSecond = yield / cycleTime;
+//	oreVolume = veldsparVolume;
+//	asteroidQuantity = 15000;
+//	asteroidVolume = asteroidQuantity * oreVolume;
+//	timeToCompletion = asteroidVolume / yieldPerSecond;
+//	startTime = new Date().getTime();
+//	endTime = startTime + (timeToCompletion * 1000);
+//	document.getElementById("debug").innerHTML = document.getElementById("list1").value;
+//}
+
+//function setYieldCycle()
+//{
+//	yield = document.getElementById("yield1").value;
+//	cycleTime = document.getElementById("cycle2").value;
+//	yieldPerSecond = yield / cycleTime;
+//	oreVolume = veldsparVolume;
+//	asteroidQuantity = 15000;
+//	asteroidVolume = asteroidQuantity * oreVolume;
+//	timeToCompletion = asteroidVolume / yieldPerSecond;
+//	startTime = new Date().getTime();
+//	endTime = startTime + (timeToCompletion * 1000);
+//	document.getElementById("debug").innerHTML = timeToCompletion;
+//}
+
+function start(num)
 {
-	yield = 540;
-	cycleTime = 180;
-	yieldPerSecond = yield / cycleTime;
-	oreVolume = veldsparVolume;
-	asteroidQuantity = 15000;
-	asteroidVolume = asteroidQuantity * oreVolume;
-	timeToCompletion = asteroidVolume / yieldPerSecond;
-	startTime = new Date().getTime();
-	endTime = startTime + (timeToCompletion * 1000);
-	document.getElementById("debug").innerHTML = timeToCompletion;
+	var yield = document.getElementById("yield1").value;
+	var cycleTime = document.getElementById("cycle2").value;
+	var yieldPerSecond = yield / cycleTime;
+	if(num == 1)
+	{
+		var oreVolume = getOreVolume(document.getElementById("list1").value);
+		var asteroidQuantity = document.getElementById("roid1").value;
+		var asteroidVolume = asteroidQuantity * oreVolume;
+		var timeToCompletion = asteroidVolume / yieldPerSecond;
+		var startTime = new Date().getTime();
+		endTime1 = startTime + (timeToCompletion * 1000);
+	}
+	else if(num == 2)
+	{
+		var oreVolume = getOreVolume(document.getElementById("list2").value);
+		var asteroidQuantity = document.getElementById("roid2").value;
+		var asteroidVolume = asteroidQuantity * oreVolume;
+		var timeToCompletion = asteroidVolume / yieldPerSecond;
+		var startTime = new Date().getTime();
+		endTime2 = startTime + (timeToCompletion * 1000);
+	}
+	else if(num == 3)
+	{
+		var oreVolume = getOreVolume(document.getElementById("list3").value);
+		var asteroidQuantity = document.getElementById("roid3").value;
+		var asteroidVolume = asteroidQuantity * oreVolume;
+		var timeToCompletion = asteroidVolume / yieldPerSecond;
+		var startTime = new Date().getTime();
+		endTime3 = startTime + (timeToCompletion * 1000);
+	}
 }
 
-function setYieldCycle()
+function getOreVolume(selectedOre)
 {
-	yield = document.getElementById("yield1").value;
-	cycleTime = document.getElementById("cycle2").value;
-	yieldPerSecond = yield / cycleTime;
-	oreVolume = veldsparVolume;
-	asteroidQuantity = 15000;
-	asteroidVolume = asteroidQuantity * oreVolume;
-	timeToCompletion = asteroidVolume / yieldPerSecond;
-	startTime = new Date().getTime();
-	endTime = startTime + (timeToCompletion * 1000);
-	document.getElementById("debug").innerHTML = timeToCompletion;
+	if(selectedOre == "veldspar")
+	{
+		return 0.1;
+	}
+	else if(selectedOre == "scordite")
+	{
+		return 0.15;
+	}
+	else if(selectedOre == "pyroxeres")
+	{
+		return 0.3;
+	}
+	else if(selectedOre == "plagioclase")
+	{
+		return 0.35;
+	}
+	else if(selectedOre == "omber")
+	{
+		return 0.6;
+	}
+	else if(selectedOre == "kernite")
+	{
+		return 1.2;
+	}
+	else if(selectedOre == "jaspet")
+	{
+		return 2;
+	}
+	else if(selectedOre == "hemorphite")
+	{
+		return 3;
+	}
+	else if(selectedOre == "hedbergite")
+	{
+		return 3;
+	}
+	else if(selectedOre == "spodumain")
+	{
+		return 16;
+	}
+	else if(selectedOre == "gneiss")
+	{
+		return 5;
+	}
+	else if(selectedOre == "darkOchre")
+	{
+		return 8;
+	}
+	else if(selectedOre == "crokite")
+	{
+		return 16;
+	}
+	else if(selectedOre == "bistot")
+	{
+		return 16;
+	}
+	else if(selectedOre == "arkonor")
+	{
+		return 16;
+	}
+	else if(selectedOre == "mercoxit")
+	{
+		return 40;
+	}
+	
 }
 
 function updateYield()
 {
-	timeLeft = endTime - new Date().getTime();
-	document.getElementById("miningYield").innerHTML = timeLeft / 1000;
+	//timeLeft = endTime - new Date().getTime();
+	//document.getElementById("miningYield").innerHTML = timeLeft / 1000;
+	
+	timeLeft1 = endTime1 - new Date().getTime();
+	if(timeLeft1 / 1000 > 0)
+	{
+		document.getElementById("timeleft1").innerHTML = Math.round(timeLeft1 / 100) / 10;
+	}
+	else
+	{
+		document.getElementById("timeleft1").innerHTML = "Empty";
+	}
+	
+	timeLeft2 = endTime2 - new Date().getTime();
+	if(timeLeft2 / 1000 > 0)
+	{
+		document.getElementById("timeleft2").innerHTML = Math.round(timeLeft2 / 100) / 10;
+	}
+	else
+	{
+		document.getElementById("timeleft2").innerHTML = "Empty";
+	}
+	
+	timeLeft3 = endTime3 - new Date().getTime();
+	if(timeLeft3 / 1000 > 0)
+	{
+		document.getElementById("timeleft3").innerHTML = Math.round(timeLeft2 / 100) / 10;
+	}
+	else
+	{
+		document.getElementById("timeleft3").innerHTML = "Empty";
+	}
 }
 
-function reset()
-{
-	init();
-	//document.getElementById("demo").innerHTML=Date();
-}
+//function reset()
+//{
+//	clearInterval(timerid);
+//	timerid = setInterval(updateYield, 33);
+//	init();
+//	//document.getElementById("demo").innerHTML=Date();
+//}
 
-setInterval(updateYield, 33); //will call updateYield every 100ms
+var timerid = setInterval(updateYield, 33); //will call updateYield every 33ms
+//clearInterval(timerid);
 </script>
 </head>
 <body>
+<h1>Eve Mining Helper 0.1</h1>
 
-<h1>Eve Mining Helper</h1>
+<table border="1" cellpadding="0" cellspacing="0" width="100%"   
+style="background        color:white;">     
+<tr>
+     <td align="center">
+	 <select id="list1">
+		<option value="veldspar">Veldspar</option>
+		<option value="scordite">Scordite</option>
+		<option value="pyroxeres">Pyroxeres</option>
+		<option value="plagioclase">Plagioclase</option>
+		<option value="omber">Omber</option>
+		<option value="kernite">Kernite</option>
+		<option value="jaspet">Jaspet</option>
+		<option value="hemorphite">Hemorphite</option>
+		<option value="hedbergite">Hedbergite</option>
+		<option value="spodumain">Spodumain</option>
+		<option value="gneiss">Gneiss</option>
+		<option value="darkOchre">Dark Ochre</option>
+		<option value="crokite">Crokite</option>
+		<option value="bistot">Bistot</option>
+		<option value="arkonor">Arkonor</option>
+		<option value="mercoxit">Mercoxit</option>
+	 </select>
+	 <p id="timeleft1"></p>
+	 </td>    
+	 
+     <td align="center">
+	 <select id="list2">
+		<option value="veldspar">Veldspar</option>
+		<option value="scordite">Scordite</option>
+		<option value="pyroxeres">Pyroxeres</option>
+		<option value="plagioclase">Plagioclase</option>
+		<option value="omber">Omber</option>
+		<option value="kernite">Kernite</option>
+		<option value="jaspet">Jaspet</option>
+		<option value="hemorphite">Hemorphite</option>
+		<option value="hedbergite">Hedbergite</option>
+		<option value="spodumain">Spodumain</option>
+		<option value="gneiss">Gneiss</option>
+		<option value="darkOchre">Dark Ochre</option>
+		<option value="crokite">Crokite</option>
+		<option value="bistot">Bistot</option>
+		<option value="arkonor">Arkonor</option>
+		<option value="mercoxit">Mercoxit</option>
+	 </select>
+	 <p id="timeleft2"></p>
+	 </td>     
+	 
+	 <td align="center">
+	 <select id="list3">
+		<option value="veldspar">Veldspar</option>
+		<option value="scordite">Scordite</option>
+		<option value="pyroxeres">Pyroxeres</option>
+		<option value="plagioclase">Plagioclase</option>
+		<option value="omber">Omber</option>
+		<option value="kernite">Kernite</option>
+		<option value="jaspet">Jaspet</option>
+		<option value="hemorphite">Hemorphite</option>
+		<option value="hedbergite">Hedbergite</option>
+		<option value="spodumain">Spodumain</option>
+		<option value="gneiss">Gneiss</option>
+		<option value="darkOchre">Dark Ochre</option>
+		<option value="crokite">Crokite</option>
+		<option value="bistot">Bistot</option>
+		<option value="arkonor">Arkonor</option>
+		<option value="mercoxit">Mercoxit</option>
+	 </select>
+	 <p id="timeleft3"></p>
+	 </td>  
+</tr>     
+<tr>         
+    <td align="center">Roid:<input type="text" name="roidAmmount1" id="roid1"><br></td> 
+    <td align="center">Roid:<input type="text" name="roidAmmount2" id="roid2"><br></td> 
+	<td align="center">Roid:<input type="text" name="roidAmmount3" id="roid3"><br></td>     
+</tr>    
+<tr>         
+    <td align="center"><button type="button" onclick="start(1)">Start</button></td> 
+    <td align="center"><button type="button" onclick="start(2)">Start</button></td> 
+	<td align="center"><button type="button" onclick="start(3)">Start</button></td>     
+</tr>    
+
+</table>
+
+<br><br><br><br>
 Yield: <input type="text" name="yieldInput" id="yield1"><br>
 Cycle Time: <input type="text" name="cycleTimeInput" id="cycle2">
 
-<p id="miningYield">This is a Paragraph for mining yield.</p>
 
-<p id="debug">This is a Paragraph for mining yield.</p>
+<p>
+Basic mining tool to keep track of how much time is left before the asteroid is depleted.<br>
+Enter the yield and cycle time for your strip miners. "Yield:" & "Cycle Time:"<br>
+Select the asteroid type you are targeting (Drop down list)<br>
+Enter the ammount of units the asteroid you are about to mine has. "Roid"<br>
+Hit start and it will give you a countdown to when the asteroid will be depleted.<br><br><br>
+Please Eve-Mail Divinus Mortis with some feedback. There are still many features left to add.
+</p>
 
-<button type="button" onclick="setYieldCycle()">Reset2</button>
-<button type="button" onclick="reset()">Reset</button>
 
 
 </body>
