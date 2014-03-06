@@ -2,18 +2,19 @@
 <html>
 <head>
 <script>
+//Written by Philippe Masson - Copyright 2013
+
 var yield = 0;
 var cycleTime = 0;
 var yieldPerSecond = 0;
-var veldsparVolume = 0.1;
 var oreVolume = 0;
 var asteroidQuantity = 0;
 var asteroidVolume = 0;
 var timeToCompletion = 0;
 var startTime = new Date().getTime();
-var endTime = 0;
-var timeLeft = 0;
-//var timeDiff = 0;
+//var veldsparVolume = 0.1; //testing purposes.
+//var endTime = 0; //testing purposes.
+//var timeLeft = 0; //testing purposes.
 
 
 var endTime1 = 0;
@@ -23,39 +24,14 @@ var timeLeft1 = 0;
 var timeLeft2 = 0;
 var timeLeft3 = 0;
 
-//function init()
-//{
-//	yield = 540;
-//	cycleTime = 180;
-//	yieldPerSecond = yield / cycleTime;
-//	oreVolume = veldsparVolume;
-//	asteroidQuantity = 15000;
-//	asteroidVolume = asteroidQuantity * oreVolume;
-//	timeToCompletion = asteroidVolume / yieldPerSecond;
-//	startTime = new Date().getTime();
-//	endTime = startTime + (timeToCompletion * 1000);
-//	document.getElementById("debug").innerHTML = document.getElementById("list1").value;
-//}
-
-//function setYieldCycle()
-//{
-//	yield = document.getElementById("yield1").value;
-//	cycleTime = document.getElementById("cycle2").value;
-//	yieldPerSecond = yield / cycleTime;
-//	oreVolume = veldsparVolume;
-//	asteroidQuantity = 15000;
-//	asteroidVolume = asteroidQuantity * oreVolume;
-//	timeToCompletion = asteroidVolume / yieldPerSecond;
-//	startTime = new Date().getTime();
-//	endTime = startTime + (timeToCompletion * 1000);
-//	document.getElementById("debug").innerHTML = timeToCompletion;
-//}
-
 function start(num)
 {
+	//calculate yield per second with the yield amount and cycle time given.
 	var yield = document.getElementById("yield1").value;
 	var cycleTime = document.getElementById("cycle2").value;
 	var yieldPerSecond = yield / cycleTime;
+	
+	//calculate how much time from now the asteroid will be depleted.
 	if(num == 1)
 	{
 		var oreVolume = getOreVolume(document.getElementById("list1").value);
@@ -85,6 +61,7 @@ function start(num)
 	}
 }
 
+//Holds the metric cube values for each different ore in game.
 function getOreVolume(selectedOre)
 {
 	if(selectedOre == "veldspar")
@@ -115,17 +92,9 @@ function getOreVolume(selectedOre)
 	{
 		return 2;
 	}
-	else if(selectedOre == "hemorphite")
+	else if(selectedOre == "hemorphite" || selectedOre == "hedbergite")
 	{
 		return 3;
-	}
-	else if(selectedOre == "hedbergite")
-	{
-		return 3;
-	}
-	else if(selectedOre == "spodumain")
-	{
-		return 16;
 	}
 	else if(selectedOre == "gneiss")
 	{
@@ -135,15 +104,7 @@ function getOreVolume(selectedOre)
 	{
 		return 8;
 	}
-	else if(selectedOre == "crokite")
-	{
-		return 16;
-	}
-	else if(selectedOre == "bistot")
-	{
-		return 16;
-	}
-	else if(selectedOre == "arkonor")
+	else if(selectedOre == "spodumain" || selectedOre == "crokite" || selectedOre == "bistot" || selectedOre == "arkonor")
 	{
 		return 16;
 	}
@@ -154,10 +115,9 @@ function getOreVolume(selectedOre)
 	
 }
 
+//Update the timers.
 function updateYield()
 {
-	//timeLeft = endTime - new Date().getTime();
-	//document.getElementById("miningYield").innerHTML = timeLeft / 1000;
 	
 	timeLeft1 = endTime1 - new Date().getTime();
 	if(timeLeft1 / 1000 > 0)
@@ -182,7 +142,7 @@ function updateYield()
 	timeLeft3 = endTime3 - new Date().getTime();
 	if(timeLeft3 / 1000 > 0)
 	{
-		document.getElementById("timeleft3").innerHTML = Math.round(timeLeft2 / 100) / 10;
+		document.getElementById("timeleft3").innerHTML = Math.round(timeLeft3 / 100) / 10;
 	}
 	else
 	{
@@ -190,20 +150,11 @@ function updateYield()
 	}
 }
 
-//function reset()
-//{
-//	clearInterval(timerid);
-//	timerid = setInterval(updateYield, 33);
-//	init();
-//	//document.getElementById("demo").innerHTML=Date();
-//}
-
 var timerid = setInterval(updateYield, 33); //will call updateYield every 33ms
-//clearInterval(timerid);
 </script>
 </head>
 <body>
-<h1>Eve Mining Helper 0.1</h1>
+<h1>Eve Mining Helper</h1>
 
 <table border="1" cellpadding="0" cellspacing="0" width="100%"   
 style="background        color:white;">     
@@ -284,12 +235,11 @@ style="background        color:white;">
     <td align="center"><button type="button" onclick="start(2)">Start</button></td> 
 	<td align="center"><button type="button" onclick="start(3)">Start</button></td>     
 </tr>    
-
 </table>
 
-<br><br><br><br>
-Yield: <input type="text" name="yieldInput" id="yield1"><br>
-Cycle Time: <input type="text" name="cycleTimeInput" id="cycle2">
+<br>
+Yield in Metric Cubes: <input type="text" name="yieldInput" id="yield1"><br>
+Cycle Time in Seconds: <input type="text" name="cycleTimeInput" id="cycle2">
 
 
 <p>
@@ -298,10 +248,9 @@ Enter the yield and cycle time for your strip miners. "Yield:" & "Cycle Time:"<b
 Select the asteroid type you are targeting (Drop down list)<br>
 Enter the ammount of units the asteroid you are about to mine has. "Roid"<br>
 Hit start and it will give you a countdown to when the asteroid will be depleted.<br><br><br>
-Please Eve-Mail Divinus Mortis with some feedback. There are still many features left to add.
 </p>
 
 
 
 </body>
-</html> 
+</html>
